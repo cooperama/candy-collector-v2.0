@@ -15,6 +15,25 @@ def about(request):
     return render(request, 'about.html')
 
 
+# ------------------- CANDY
+def candy_index(request):
+    all_candy = Candy.objects.all()
+    context = {
+        'all_candy': all_candy
+    }
+    return render(request, 'candy/index.html', context)
+
+
+def candy_detail(request, candy_id):
+    candy = Candy.objects.get(id=candy_id)
+    context = {
+        'candy': candy
+    }
+    return render(request, 'candy/detail.html', context)
+
+
+
+
 # ------------------- STORES
 @login_required
 def user_stores(request):
