@@ -66,6 +66,26 @@ def user_stores(request):
     return render(request, 'stores/user_index.html', context)
 
 
+def stores_index(request):
+    stores = Store.objects.all()
+    context = {
+        'stores': stores
+    }
+    return render(request, 'stores/index.html', context)
+
+
+def store_detail(request, store_id):
+    store = Store.objects.get(id=store_id)
+    all_candy = Candy.objects.filter(seller=store.id)
+
+    context = {
+        'store': store,
+        'all_candy': all_candy,
+    }
+    return render(request, 'stores/detail.html', context)
+
+
+
 # ------------------- PROFILE/USER
 def signup(request):
     error_message = ''
